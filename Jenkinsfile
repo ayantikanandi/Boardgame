@@ -1,31 +1,32 @@
 pipeline {
     agent any
-    
+
     tools {
-        maven 'maven3.6'
-        jdk 'jdk17'
+        maven 'Maven_3.8.7'
+    }
+
+    environment {
+        SONARQUBE = 'SonarQube_Server'
     }
 
     stages {
-        
-        stage('Compile') {
+        stage('Checkout') {
             steps {
-             sh 'mvn compile'
+                git 'https://github.com/ayantikanandi/Boardgame.git'
             }
         }
-        stage('test') {
+
+        stage('Build') {
             steps {
-                sh 'mvn test'
+                sh 'mvn clean install'
             }
         }
-        stage('Package') {
+
+        stage('SonarQube Analysis') {
             steps {
-               sh 'mvn package'
-            }
-        }
-        stage('Hello') {
-            steps {
-                echo 'Hello World'
+                withSonarQubeEnv("${SONARQUBE}") {
+                    sh 'mvn sonar:sonar'
+                }
             }
         }
     }
