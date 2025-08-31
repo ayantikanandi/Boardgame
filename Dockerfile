@@ -1,11 +1,14 @@
+# Use official JDK runtime as base
 FROM openjdk:21-jdk-slim
 
-EXPOSE 8080
+EXPOSE 8000
 
-ENV APP_HOME=/usr/src/app
+# Set working directory
+WORKDIR /app
 
-COPY target/*.jar $APP_HOME/app.jar
+# Copy jar file into container
+COPY target/*.jar app.jar
 
-WORKDIR $APP_HOME
+# Run the jar
+ENTRYPOINT ["java", "-jar", "app.jar"]
 
-CMD ["java", "-jar", "app.jar"]
