@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: boardgame-app
+  labels:
+    app: boardgame
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: boardgame
+  template:
+    metadata:
+      labels:
+        app: boardgame
+    spec:
+      containers:
+      - name: boardgame
+        image: 805187822135.dkr.ecr.us-east-1.amazonaws.com/devops_workshop/boardgame:latest
+        ports:
+        - containerPort: 8001
+        imagePullPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: boardgame-service
+spec:
+  selector:
+    app: boardgame
+  ports:
+  - protocol: TCP
+    port: 8001
+    targetPort: 8001
+  type: LoadBalancer
+
