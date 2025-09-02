@@ -1,7 +1,7 @@
 # Use official JDK runtime as base
 FROM openjdk:21-jdk-slim
 
-EXPOSE 8000
+EXPOSE 8080
 
 # Set working directory
 WORKDIR /app
