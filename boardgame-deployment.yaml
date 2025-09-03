@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: boardgame
-        image: 805187822135.dkr.ecr.us-east-1.amazonaws.com/devops_workshop/boardgame:latest
+        image: __IMAGE_TAG__
         ports:
         - containerPort: 8005
         imagePullPolicy: Always
