@@ -18,7 +18,7 @@ spec:
       - name: boardgame
         image: 805187822135.dkr.ecr.us-east-1.amazonaws.com/devops_workshop/boardgame:latest
         ports:
-        - containerPort: 8001
+        - containerPort: 8005
         imagePullPolicy: Always
 ---
 apiVersion: v1
