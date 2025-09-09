@@ -51,3 +51,111 @@ This web application displays lists of board games and their reviews. While anyo
   - username: bugs    |     password: bunny (user role)
   - username: daffy   |     password: duck  (manager role)
 5. You can also sign-up as a new user and customize your role to play with the application! 😊
+
+
+# 🧩 Boardgame CI/CD Pipeline
+
+This repository contains a Jenkins pipeline that automates the build, test, security scan, and deployment of a Java-based board game application to Amazon EKS using Docker and AWS ECR.
+
+## 🚀 Pipeline Overview
+
+The Jenkins pipeline performs the following stages:
+
+1. **Checkout**  
+   Clones the source code from the `main` branch of GitHub.
+
+2. **SonarQube Analysis**  
+   Runs static code analysis using SonarQube.
+
+3. **Quality Gate**  
+   Waits for SonarQube's quality gate result and aborts if it fails.
+
+4. **Compile & Test**  
+   Compiles the code and runs unit tests using Maven.
+
+5. **Package & Archive**  
+   Packages the application into a `.jar` file and archives it as a build artifact.
+
+6. **Docker Build**  
+   Builds a Docker image tagged with the Jenkins build number.
+
+7. **Trivy Security Scan**  
+   Scans the Docker image for vulnerabilities with severity `HIGH` and `CRITICAL`.
+
+8. **AWS Identity Verification**  
+   Verifies AWS credentials using a proxy script.
+
+9. **Login to AWS ECR**  
+   Authenticates Docker to push images to AWS Elastic Container Registry.
+
+10. **Push Docker Image**  
+    Pushes the built image to the specified ECR repository.
+
+11. **Deploy to EKS**  
+    Updates the Kubernetes deployment YAML with the new image tag and applies it to the EKS cluster.
+
+12. **Restart Deployment**  
+    Restarts the Kubernetes deployment to apply the new image.
+
+---
+
+## 🛠️ Prerequisites
+
+- Jenkins with:
+  - Maven and JDK tools configured (`mvn-system-install`, `jdk-system-install`)
+  - SonarQube plugin and server configured (`SonarQube-Jenkins`)
+- AWS CLI installed and configured
+- Docker installed
+- Trivy installed for image scanning
+- `aws-proxy.sh` script for secure AWS CLI execution
+- Access to:
+  - AWS ECR registry
+  - EKS cluster
+
+---
+
+## 📦 Deployment Notes
+
+- The Kubernetes deployment file `boardgame-deployment.yaml` must contain a placeholder `__IMAGE_TAG__` which gets replaced during deployment.
+- Ensure the Jenkins EC2 instance has IAM permissions to interact with ECR and EKS.
+- The pipeline uses `kubectl rollout restart` to trigger a fresh deployment after applying the new image.
+
+---
+
+## 🔐 Security
+
+- Trivy enforces a fail-fast policy for critical vulnerabilities (`--exit-code 1`).
+- AWS identity is verified before pushing to ECR or deploying to EKS.
+- Docker login uses secure password injection via AWS CLI.
+
+---
+
+## 📁 Artifact Location
+
+- Packaged `.jar` files are archived from `target/*.jar` and fingerprinted for traceability.
+
+---
+
+## 📌 Environment Variables
+
+| Variable             | Description                                      |
+|----------------------|--------------------------------------------------|
+| `AWS_REGION`         | AWS region for ECR and EKS                       |
+| `ECR_REGISTRY`       | AWS ECR registry URL                             |
+| `ECR_REPO`           | ECR repository path                              |
+| `REPO_NAME`          | Full image path for Docker and ECR              |
+| `AWS_PROXY`          | Path to AWS CLI wrapper script                   |
+| `EKS_CLUSTER_NAME`   | Name of the EKS cluster                          |
+| `IMAGE_TAG`          | Docker image tag (set to Jenkins build number)  |
+| `SONARQUBE`          | SonarQube server name in Jenkins                 |
+
+---
+
+## 🧠 Author
+
+Maintained by [Ayantika Nandi](https://github.com/ayantikanandi)  
+DevOps enthusiast focused on cloud-native automation, security, and cost-aware infrastructure.
+
+---
+
+
