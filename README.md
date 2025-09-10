@@ -158,4 +158,6 @@ DevOps enthusiast focused on cloud-native automation, security, and cost-aware i
 
 ---
 
+<img width="1365" height="676" alt="image" src="https://github.com/user-attachments/assets/7aee064f-ff3d-4125-ab9d-876eee462fd2" />
+
 
