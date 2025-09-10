@@ -162,8 +162,19 @@ DevOps enthusiast focused on cloud-native automation, security, and cost-aware i
 
 <img width="1365" height="676" alt="image" src="https://github.com/user-attachments/assets/7aee064f-ff3d-4125-ab9d-876eee462fd2" />
 
-## Grafana Dashboard
+## Prometeheus 
+<img width="1358" height="658" alt="image" src="https://github.com/user-attachments/assets/8ff906cb-4014-4a0e-8a07-252dce4c75de" />
+
+## Grafana Dashboard for EKS monitoring
 
 <img width="1365" height="688" alt="image" src="https://github.com/user-attachments/assets/8e1e7b68-900b-4497-a461-584a7dda7782" />
+
+<img width="1348" height="666" alt="image" src="https://github.com/user-attachments/assets/6fc5c3d8-baf6-4183-a32f-ee92f33b004e" />
+
+## Grafana Dashboard for Jenkins monitoring
+
+<img width="1349" height="667" alt="image" src="https://github.com/user-attachments/assets/bd73342e-5786-4506-b61d-9277483ca1ac" />
+
+
 
 
