@@ -158,6 +158,12 @@ DevOps enthusiast focused on cloud-native automation, security, and cost-aware i
 
 ---
 
+## EKS Boardgame 
+
 <img width="1365" height="676" alt="image" src="https://github.com/user-attachments/assets/7aee064f-ff3d-4125-ab9d-876eee462fd2" />
+
+## Grafana Dashboard
+
+<img width="1365" height="688" alt="image" src="https://github.com/user-attachments/assets/8e1e7b68-900b-4497-a461-584a7dda7782" />
 
 
